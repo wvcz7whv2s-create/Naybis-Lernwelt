@@ -57,6 +57,22 @@
 
   .foot{margin-top:auto;text-align:center;font-size:12.5px;color:var(--ink-soft);padding-top:26px;}
 
+  .hist-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin:18px auto 0;background:var(--card);border:none;cursor:pointer;
+    border-radius:16px;padding:12px 18px;font-size:14px;font-weight:700;color:var(--ink-soft);
+    box-shadow:var(--shadow-sm);
+  }
+  .hist-btn:active{transform:scale(.97);}
+
+  .hist-list{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .hist-item{
+    background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:var(--shadow-sm);
+    border-left:5px solid var(--mathe);
+  }
+  .hist-item .d{font-size:12.5px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px;}
+  .hist-item .t{font-size:16px;font-weight:700;margin-top:4px;line-height:1.35;}
+
   /* ---------- QUIZ ---------- */
   .top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
   .back{
@@ -229,6 +245,13 @@ const SACH=[
    why:"Der Mond leuchtet nicht selbst – die Sonne strahlt ihn an, und wir sehen das Licht."}
 ];
 
+/* ---------------- Verlauf ---------------- */
+// Hier trägt Papa (bzw. Claude) jede Änderung mit Datum ein.
+const CHANGELOG=[
+  {date:"26.07.2026", text:"Lernwelt ist online gegangen! 🎉 Erste Aufgaben zu Mathe, Deutsch und Sachunterricht."},
+  {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."}
+];
+
 /* ---------------- Ablauf ---------------- */
 const SUBJECTS={
   mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 1000 & Einmaleins",accent:"var(--mathe)",count:8},
@@ -270,7 +293,27 @@ function renderHome(){
           <span class="go">›</span>
         </button>`).join("")}
     </div>
+    <button class="hist-btn" onclick="renderHistory()">🕘 Verlauf ansehen</button>
     <div class="foot">Prototyp · Übungen für die 3. Klasse</div>`;
+}
+
+/* ---- Verlaufs-Seite ---- */
+function renderHistory(){
+  document.documentElement.style.setProperty('--accent','var(--mathe)');
+  const items=CHANGELOG.slice().reverse(); // neueste zuerst
+  app.innerHTML=`
+    <div class="top">
+      <button class="back" onclick="renderHome()">‹</button>
+      <span class="name">🕘 Verlauf</span>
+    </div>
+    <div class="hist-list">
+      ${items.map(it=>`
+        <div class="hist-item">
+          <div class="d">${it.date}</div>
+          <div class="t">${it.text}</div>
+        </div>`).join("")}
+    </div>
+    <div class="foot">Das war's bisher – es geht weiter! 🌱</div>`;
 }
 
 /* ---- QUIZ starten ---- */
