@@ -13,6 +13,7 @@
     --mathe:#2FA6B8;
     --deutsch:#EF7D57;
     --sach:#5FB07A;
+    --text:#8B6FCF;
     --star:#FBC02D;
     --good:#4CAF6E;
     --oops:#E86A6A;
@@ -201,6 +202,46 @@ function makeMathQuestions(n){
   return qs;
 }
 
+// TEXTAUFGABEN: Original-Sachaufgaben (aus "Matheaufgaben für Naybi")
+const TEXTAUFGABEN=[
+  {text:"Emma hat 34 Gummibärchen. Ihre beste Freundin schenkt ihr 47 weitere. Wie viele Gummibärchen hat Emma jetzt?",answer:81},
+  {text:"Ein Clown hat 58 bunte Luftballons. Der Wind bläst ihm 29 neue zu. Wie viele Luftballons hat der Clown insgesamt?",answer:87},
+  {text:"Tim sammelt Dinosaurierkarten. Er hat 63 Karten zu Hause und kauft im Laden 38 neue. Wie viele Karten hat er jetzt?",answer:101},
+  {text:"In der Schulkantine gibt es heute Pommes. 45 Kinder wollen welche, dann kommen noch 37 Kinder dazu. Wie viele Kinder wollen Pommes?",answer:82},
+  {text:"Ein Hund hat in seinem Leben schon 76 Socken geklaut. Heute klaut er noch 18 dazu. Wie viele Socken hat der freche Hund insgesamt?",answer:94},
+  {text:"Auf dem Spielplatz sind 52 Tauben. Plötzlich fliegen 41 weitere Tauben herbei, weil jemand Brot wirft. Wie viele Tauben sind es jetzt?",answer:93},
+  {text:"Der Zauberer Zippel hat 49 Zaubertricks gelernt. Sein Meister zeigt ihm noch 44 neue Tricks. Wie viele Tricks kann Zippel jetzt?",answer:93},
+  {text:"In einer Bäckerei werden morgens 85 Brötchen gebacken. Mittags werden nochmal 47 frische gebacken. Wie viele Brötchen wurden insgesamt gebacken?",answer:132},
+  {text:"Lena liest ein Buch. Sie hat schon 37 Seiten gelesen und liest dann noch 56 Seiten weiter. Wie viele Seiten hat sie insgesamt gelesen?",answer:93},
+  {text:"Ein Ritter hat 67 Rüstungsteile geputzt. Dann muss er noch 48 weitere putzen. Wie viele Rüstungsteile hat er insgesamt geputzt?",answer:115},
+  {text:"Auf einem Bauernhof gibt es 74 Hühner. Der Bauer kauft 39 neue Hühner dazu. Wie viele Hühner gackern jetzt insgesamt auf dem Hof?",answer:113},
+  {text:"Noah hat in den Ferien 88 Fotos gemacht. Sein Bruder hat 55 Fotos gemacht. Wie viele Fotos haben die beiden zusammen gemacht?",answer:143},
+  {text:"Ein Pirat hat 143 Goldmünzen im Schatz. Er gibt 58 Münzen für einen neuen Papagei aus. Wie viele Münzen hat der Pirat noch?",answer:85},
+  {text:"In einer Tüte sind 120 Bonbons. Jonas isst 47 davon auf. Wie viele Bonbons sind noch in der Tüte?",answer:73},
+  {text:"Ein Zug hat 135 Fahrgäste. An der ersten Station steigen 68 Personen aus. Wie viele Fahrgäste sind noch im Zug?",answer:67},
+  {text:"Sophie hat 98 Aufkleber in ihrer Sammlung. Sie verschenkt 35 Aufkleber an ihre Freundin. Wie viele Aufkleber hat Sophie noch?",answer:63},
+  {text:"In einem Wimmelbuch gibt es 150 versteckte Gegenstände. Luca hat schon 87 gefunden. Wie viele Gegenstände muss er noch suchen?",answer:63},
+  {text:"Ein Kühlschrank hatte 112 Joghurts. Die Familie isst 49 davon. Wie viele Joghurts sind noch im Kühlschrank?",answer:63},
+  {text:"Ein Schwimmbad hat 140 Badegäste. Als es zu regnen beginnt, gehen 93 Gäste nach Hause. Wie viele Gäste sind noch im Schwimmbad?",answer:47},
+  {text:"Im Tierpark leben 127 Tiere. 54 davon schlafen gerade tief und fest. Wie viele Tiere sind wach?",answer:73},
+  {text:"Ein Bäcker hat 108 Kekse gebacken. Er verkauft 79 Kekse bis zum Mittag. Wie viele Kekse sind noch übrig?",answer:29},
+  {text:"Auf einer langen Wanderung muss Mia 136 Treppen hochsteigen. Sie hat schon 65 Stufen geschafft. Wie viele Stufen fehlen ihr noch?",answer:71},
+  {text:"Ein Clown hat 115 Witze in seinem Witzebuch. Er hat heute schon 48 Witze erzählt. Wie viele Witze hat er noch nicht erzählt?",answer:67},
+  {text:"Im Zirkus wurden 130 Eintrittskarten verkauft. Dann werden 57 Karten zurückgegeben, weil der Löwe erkältet ist. Wie viele Karten sind noch gültig?",answer:73},
+  {text:"Ein Oktopus hat 8 Arme. Wie viele Arme haben 7 Oktopusse insgesamt?",answer:56},
+  {text:"Eine Spinne hat 8 Beine. Wie viele Beine haben 6 Spinnen zusammen?",answer:48},
+  {text:"Ein Päckchen Kaugummis enthält 5 Streifen. Wie viele Streifen sind in 9 Päckchen?",answer:45},
+  {text:"Eine Klasse backt Muffins. Jedes der 8 Kinder backt 7 Muffins. Wie viele Muffins gibt es insgesamt?",answer:56},
+  {text:"Ein Hund vergräbt jeden Tag 4 Knochen. Wie viele Knochen vergräbt er in einer Woche (7 Tage)?",answer:28},
+  {text:"Ein Zauberer zaubert 6 Mal und bei jedem Mal erscheinen 9 Hasen aus dem Hut. Wie viele Hasen sind das insgesamt?",answer:54},
+  {text:"36 Kekse sollen gleichmäßig auf 4 Teller verteilt werden. Wie viele Kekse kommen auf jeden Teller?",answer:9},
+  {text:"45 Schüler gehen auf Klassenfahrt und fahren in Autos mit je 5 Plätzen. Wie viele Autos werden gebraucht?",answer:9},
+  {text:"Ein Clown hat 24 bunte Nasen und verteilt sie gleichmäßig an seine 3 Clowns-Kollegen. Wie viele Nasen bekommt jeder?",answer:8},
+  {text:"30 Bonbons werden gerecht auf 6 Freunde aufgeteilt. Wie viele Bonbons bekommt jedes Kind?",answer:5},
+  {text:"Ein Pirat findet 48 Goldmünzen und teilt sie gleichmäßig in 4 Schatztruhen auf. Wie viele Münzen sind in jeder Truhe?",answer:12},
+  {text:"28 Socken liegen auf einem Haufen. Wie viele Paare ergibt das?",answer:14}
+];
+
 // DEUTSCH: Rechtschreibung – welche Schreibweise ist richtig?
 const DEUTSCH=[
   {text:"Welches Wort ist richtig geschrieben?",opts:["Fahrrad","Farrad","Fahrad"],correct:0},
@@ -249,14 +290,16 @@ const SACH=[
 // Hier trägt Papa (bzw. Claude) jede Änderung mit Datum ein.
 const CHANGELOG=[
   {date:"26.07.2026", text:"Lernwelt ist online gegangen! 🎉 Erste Aufgaben zu Mathe, Deutsch und Sachunterricht."},
-  {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."}
+  {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."},
+  {date:"27.07.2026", text:"Neue Rubrik „Textaufgaben" 📖 dazugekommen – mit den lustigen Geschichten von Piraten, Zauberern und frechen Hunden."}
 ];
 
 /* ---------------- Ablauf ---------------- */
 const SUBJECTS={
   mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 1000 & Einmaleins",accent:"var(--mathe)",count:8},
   deutsch:{name:"Deutsch",emoji:"📖",tag:"Richtig schreiben",accent:"var(--deutsch)",count:8},
-  sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:6}
+  sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:6},
+  text:{name:"Textaufgaben",emoji:"📖",tag:"Knifflige Sachaufgaben",accent:"var(--text)",count:8}
 };
 
 const app=document.getElementById("app");
@@ -266,6 +309,9 @@ function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=
 
 function buildQuestions(sub){
   if(sub==="mathe") return makeMathQuestions(SUBJECTS.mathe.count);
+  if(sub==="text"){
+    return shuffle(TEXTAUFGABEN).slice(0,SUBJECTS.text.count).map(q=>({kind:"num",text:q.text,answer:String(q.answer)}));
+  }
   const pool = sub==="deutsch"?DEUTSCH:SACH;
   return shuffle(pool).slice(0,SUBJECTS[sub].count).map(q=>{
     // Antwortoptionen mischen, richtige Antwort mitverfolgen
@@ -351,7 +397,7 @@ function renderQuestion(){
     <div class="dots">${dots}</div>
     <div class="q-card">
       <div class="q-label">${q.kind==='num'?'Rechne aus':'Aufgabe '+(s.idx+1)}</div>
-      <div class="q-text ${q.kind==='choice'&&q.text.length>34?'small':''}">${q.text}</div>
+      <div class="q-text ${q.text.length>34?'small':''}">${q.text}</div>
     </div>
     ${body}
     <div class="fb" id="fb"></div>
