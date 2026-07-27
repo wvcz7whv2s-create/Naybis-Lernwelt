@@ -74,6 +74,44 @@
   .hist-item .d{font-size:12.5px;font-weight:800;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.5px;}
   .hist-item .t{font-size:16px;font-weight:700;margin-top:4px;line-height:1.35;}
 
+  /* ---------- STORY (Mehrschritt-Geschichten) ---------- */
+  .story-card{
+    background:var(--card);border-radius:28px;box-shadow:var(--shadow);
+    padding:26px 22px;margin-bottom:20px;
+  }
+  .story-emoji{font-size:40px;text-align:center;display:block;margin-bottom:6px;}
+  .story-title{font-size:19px;font-weight:800;text-align:center;color:var(--accent);margin-bottom:14px;}
+  .story-text{font-size:17px;line-height:1.55;color:var(--ink);}
+  .story-text b{color:var(--accent);font-weight:800;}
+
+  .steps{display:flex;flex-direction:column;gap:12px;margin-top:18px;}
+  .step{
+    background:color-mix(in srgb, var(--accent) 7%, white);
+    border-radius:18px;padding:14px 16px;
+    border:2.5px solid transparent;transition:border-color .15s,opacity .2s;
+  }
+  .step.locked{opacity:.45;}
+  .step .slabel{font-size:13px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.4px;}
+  .step .stext{font-size:15.5px;font-weight:600;margin:4px 0 10px;color:var(--ink);}
+  .step .srow{display:flex;gap:10px;align-items:center;}
+  .step input{
+    flex:1;border:none;border-radius:12px;padding:12px 14px;font-size:20px;font-weight:800;
+    background:#fff;box-shadow:inset 0 0 0 2px #e6e8ee;color:var(--ink);text-align:center;
+    -webkit-appearance:none;
+  }
+  .step input:focus{outline:none;box-shadow:inset 0 0 0 2.5px var(--accent);}
+  .step button.chk{
+    border:none;border-radius:12px;background:var(--accent);color:#fff;font-weight:800;
+    font-size:16px;padding:12px 18px;cursor:pointer;
+  }
+  .step button.chk:active{transform:scale(.95);}
+  .step.correct{border-color:var(--good);}
+  .step.wrong input{box-shadow:inset 0 0 0 2.5px var(--oops);}
+  .step .stepfb{font-size:13.5px;font-weight:700;margin-top:8px;display:none;}
+  .step .stepfb.show{display:block;}
+  .step .stepfb.ok{color:#2f7a4e;}
+  .step .stepfb.no{color:#b64545;}
+
   /* ---------- QUIZ ---------- */
   .top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
   .back{
@@ -202,6 +240,37 @@ function makeMathQuestions(n){
   return qs;
 }
 
+// GESCHICHTEN: Mehrschritt-Sachaufgaben (aus "Matheaufgaben für Naybi")
+const STORIES=[
+  {
+    emoji:"🍎", title:"Apfelernte bei Oma",
+    text:"Lena hilft Oma im Garten beim Apfelpflücken. Sie füllt <b>3</b> Körbe mit je <b>6</b> Äpfeln. Dann kommt Opa und bringt ihr noch <b>25</b> Äpfel aus dem Keller. Am Abend backen sie zusammen einen Apfelkuchen und brauchen dafür <b>16</b> Äpfel. Wie viele Äpfel hat Lena am Ende noch übrig? 🥧",
+    steps:[
+      {label:"Schritt 1 · Mal rechnen",q:"Wie viele Äpfel sind in den 3 Körben (3 × 6)?",a:18},
+      {label:"Schritt 2 · Plus rechnen",q:"Jetzt Opas 25 Äpfel dazuzählen:",a:43},
+      {label:"Schritt 3 · Minus rechnen",q:"Zum Schluss die 16 Kuchen-Äpfel abziehen:",a:27}
+    ]
+  },
+  {
+    emoji:"🏴‍☠️", title:"Der Piratenschatz",
+    text:"Käpt'n Krummbein öffnet <b>4</b> Schatztruhen. In jeder Truhe glitzern <b>20</b> Goldmünzen. Beim Graben am Strand findet er noch <b>38</b> weitere Münzen. Doch dann kauft er sich einen frechen Papagei für <b>49</b> Münzen. Wie viele Goldmünzen hat der Käpt'n jetzt noch? 🦜",
+    steps:[
+      {label:"Schritt 1 · Mal rechnen",q:"Wie viel Gold ist in den 4 Truhen (4 × 20)?",a:80},
+      {label:"Schritt 2 · Plus rechnen",q:"Jetzt die 38 Strand-Münzen dazuzählen:",a:118},
+      {label:"Schritt 3 · Minus rechnen",q:"Zum Schluss die 49 Münzen für den Papagei abziehen:",a:69}
+    ]
+  },
+  {
+    emoji:"🎈", title:"Die Geburtstagsparty",
+    text:"Mia schmückt für ihren Geburtstag <b>5</b> Tische mit je <b>5</b> Luftballons. Der Partyservice liefert noch <b>60</b> bunte Ballons dazu. Beim wilden Toben platzen leider <b>28</b> Ballons mit lautem Knall. Wie viele Luftballons schweben am Ende noch durch den Raum? 🎉",
+    steps:[
+      {label:"Schritt 1 · Mal rechnen",q:"Wie viele Ballons sind auf den 5 Tischen (5 × 5)?",a:25},
+      {label:"Schritt 2 · Plus rechnen",q:"Jetzt die 60 gelieferten Ballons dazuzählen:",a:85},
+      {label:"Schritt 3 · Minus rechnen",q:"Zum Schluss die 28 geplatzten Ballons abziehen:",a:57}
+    ]
+  }
+];
+
 // TEXTAUFGABEN: Original-Sachaufgaben (aus "Matheaufgaben für Naybi")
 const TEXTAUFGABEN=[
   {text:"Emma hat 34 Gummibärchen. Ihre beste Freundin schenkt ihr 47 weitere. Wie viele Gummibärchen hat Emma jetzt?",answer:81},
@@ -291,7 +360,8 @@ const SACH=[
 const CHANGELOG=[
   {date:"26.07.2026", text:"Lernwelt ist online gegangen! 🎉 Erste Aufgaben zu Mathe, Deutsch und Sachunterricht."},
   {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."},
-  {date:"27.07.2026", text:"Neue Rubrik „Textaufgaben" 📖 dazugekommen – mit den lustigen Geschichten von Piraten, Zauberern und frechen Hunden."}
+  {date:"27.07.2026", text:"Neue Rubrik Textaufgaben 📖 dazugekommen – mit den lustigen Geschichten von Piraten, Zauberern und frechen Hunden."},
+  {date:"27.07.2026", text:"Große Geschichten 📜 dazugekommen: Apfelernte bei Oma, Der Piratenschatz und Die Geburtstagsparty – jede mit 3 Rechenschritten."}
 ];
 
 /* ---------------- Ablauf ---------------- */
@@ -301,6 +371,7 @@ const SUBJECTS={
   sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:6},
   text:{name:"Textaufgaben",emoji:"📖",tag:"Knifflige Sachaufgaben",accent:"var(--text)",count:8}
 };
+const STORY_META={name:"Geschichten",emoji:"📜",tag:"Große Rechen-Abenteuer in 3 Schritten",accent:"#D98C3D"};
 
 const app=document.getElementById("app");
 let state=null;
@@ -338,6 +409,11 @@ function renderHome(){
           <span class="txt"><h2>${s.name}</h2><p>${s.tag}</p></span>
           <span class="go">›</span>
         </button>`).join("")}
+      <button class="card" style="--c:${STORY_META.accent}" onclick="startStories()">
+        <span class="emoji">${STORY_META.emoji}</span>
+        <span class="txt"><h2>${STORY_META.name}</h2><p>${STORY_META.tag}</p></span>
+        <span class="go">›</span>
+      </button>
     </div>
     <button class="hist-btn" onclick="renderHistory()">🕘 Verlauf ansehen</button>
     <div class="foot">Prototyp · Übungen für die 3. Klasse</div>`;
@@ -360,6 +436,97 @@ function renderHistory(){
         </div>`).join("")}
     </div>
     <div class="foot">Das war's bisher – es geht weiter! 🌱</div>`;
+}
+
+/* ---- Geschichten: Auswahl ---- */
+function startStories(){
+  document.documentElement.style.setProperty('--accent',STORY_META.accent);
+  app.innerHTML=`
+    <div class="top">
+      <button class="back" onclick="renderHome()">‹</button>
+      <span class="name">${STORY_META.emoji} Geschichten</span>
+    </div>
+    <div class="cards">
+      ${STORIES.map((s,i)=>`
+        <button class="card" style="--c:${STORY_META.accent}" onclick="openStory(${i})">
+          <span class="emoji">${s.emoji}</span>
+          <span class="txt"><h2>${s.title}</h2><p>3 Rechenschritte zum Knobeln</p></span>
+          <span class="go">›</span>
+        </button>`).join("")}
+    </div>
+    <div class="foot">Wähl ein Abenteuer aus 📜</div>`;
+}
+
+/* ---- Geschichte spielen ---- */
+let storyState=null;
+function openStory(i){
+  const s=STORIES[i];
+  storyState={idx:i,step:0,done:[false,false,false]};
+  renderStory();
+}
+function renderStory(){
+  const s=STORIES[storyState.idx];
+  app.innerHTML=`
+    <div class="top">
+      <button class="back" onclick="startStories()">‹</button>
+      <span class="name">${s.emoji} ${s.title}</span>
+    </div>
+    <div class="story-card">
+      <span class="story-emoji">${s.emoji}</span>
+      <div class="story-text">${s.text}</div>
+      <div class="steps">
+        ${s.steps.map((st,i)=>`
+          <div class="step ${i>storyState.step?'locked':''}" id="step${i}">
+            <div class="slabel">${st.label}</div>
+            <div class="stext">${st.q}</div>
+            <div class="srow">
+              <input type="number" inputmode="numeric" id="inp${i}" ${i>storyState.step?'disabled':''} placeholder="?">
+              <button class="chk" ${i>storyState.step?'disabled style="opacity:.3"':''} onclick="checkStep(${i})">✓</button>
+            </div>
+            <div class="stepfb" id="fb${i}"></div>
+          </div>`).join("")}
+      </div>
+    </div>`;
+}
+function checkStep(i){
+  const s=STORIES[storyState.idx], st=s.steps[i];
+  const inp=document.getElementById("inp"+i);
+  const val=inp.value.trim();
+  const stepEl=document.getElementById("step"+i);
+  const fb=document.getElementById("fb"+i);
+  if(val===""||isNaN(val)) return;
+  if(parseInt(val,10)===st.a){
+    stepEl.classList.add("correct");
+    inp.disabled=true;
+    fb.className="stepfb show ok"; fb.textContent="Richtig! ✓";
+    if(i===s.steps.length-1){
+      setTimeout(()=>storyDone(),700);
+    }else{
+      storyState.step=i+1;
+      setTimeout(renderStory,500);
+    }
+  }else{
+    stepEl.classList.add("wrong");
+    fb.className="stepfb show no"; fb.textContent="Nicht ganz – versuch's nochmal.";
+    setTimeout(()=>stepEl.classList.remove("wrong"),600);
+  }
+}
+function storyDone(){
+  const s=STORIES[storyState.idx];
+  app.innerHTML=`
+    <div class="top">
+      <button class="back" onclick="startStories()">‹</button>
+      <span class="name">${s.emoji} ${s.title}</span>
+    </div>
+    <div class="done">
+      <div class="burst">🏆</div>
+      <h2>Geschafft!</h2>
+      <p>Du hast das ganze Abenteuer gelöst.</p>
+      <div class="row">
+        <button class="again" onclick="openStory(${storyState.idx})">Nochmal</button>
+        <button class="home-btn" onclick="startStories()">Andere Geschichte</button>
+      </div>
+    </div>`;
 }
 
 /* ---- QUIZ starten ---- */
