@@ -230,10 +230,10 @@ function makeMathQuestions(n){
     let a,b,text,answer;
     if(type===0){ // Einmaleins
       a=rnd(2,10); b=rnd(2,10); text=a+" × "+b; answer=a*b;
-    }else if(type===1){ // Plus bis 1000
-      a=rnd(20,500); b=rnd(20,500); text=a+" + "+b; answer=a+b;
-    }else{ // Minus, kein negatives Ergebnis
-      a=rnd(50,900); b=rnd(10,a); text=a+" − "+b; answer=a-b;
+    }else if(type===1){ // Plus bis 200
+      a=rnd(10,150); b=rnd(10,200-a); text=a+" + "+b; answer=a+b;
+    }else{ // Minus bis 200, kein negatives Ergebnis
+      a=rnd(50,200); b=rnd(10,a); text=a+" − "+b; answer=a-b;
     }
     qs.push({kind:"num",text:text,answer:String(answer)});
   }
@@ -366,7 +366,7 @@ const CHANGELOG=[
 
 /* ---------------- Ablauf ---------------- */
 const SUBJECTS={
-  mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 1000 & Einmaleins",accent:"var(--mathe)",count:8},
+  mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 200 & Einmaleins",accent:"var(--mathe)",count:8},
   deutsch:{name:"Deutsch",emoji:"📖",tag:"Richtig schreiben",accent:"var(--deutsch)",count:8},
   sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:6},
   text:{name:"Textaufgaben",emoji:"📖",tag:"Knifflige Sachaufgaben",accent:"var(--text)",count:8}
