@@ -324,7 +324,15 @@ const DEUTSCH=[
   {text:"Welches Wort ist richtig geschrieben?",opts:["Apfel","Apffel","Aptfel"],correct:0},
   {text:"Welches Wort ist richtig geschrieben?",opts:["Regen","Rägen","Reegen"],correct:0},
   {text:"Welches Wort ist richtig geschrieben?",opts:["Familie","Familje","Familieh"],correct:0},
-  {text:"Welches Wort ist richtig geschrieben?",opts:["Känguru","Kenguru","Kängeruh"],correct:0}
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Känguru","Kenguru","Kängeruh"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Schmetterling","Schmetterlink","Schmeterling"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Fußball","Fussball","Fußbal"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Baum","Baom","Bahm"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Himmel","Himel","Himmell"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Winter","Vinter","Wintar"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Sommer","Somer","Sommar"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Vogel","Fogel","Vogell"],correct:0},
+  {text:"Welches Wort ist richtig geschrieben?",opts:["Giraffe","Girafe","Schiraffe"],correct:0}
 ];
 
 // SACHUNTERRICHT: Zusammenhänge verstehen – mit Erklärung
@@ -352,7 +360,55 @@ const SACH=[
    why:"Ohne Luft, Wasser und Futter kann kein Tier lange leben."},
   {text:"Warum können wir den Mond am Himmel sehen?",
    opts:["Die Sonne leuchtet ihn an","Er hat selbst eine Lampe","Er brennt"],correct:0,
-   why:"Der Mond leuchtet nicht selbst – die Sonne strahlt ihn an, und wir sehen das Licht."}
+   why:"Der Mond leuchtet nicht selbst – die Sonne strahlt ihn an, und wir sehen das Licht."},
+  {text:"Warum wechseln sich die Jahreszeiten ab?",
+   opts:["Die Erde umkreist geneigt die Sonne","Der Mond steuert das","Die Menschen entscheiden das"],correct:0,
+   why:"Die Erde umkreist die Sonne einmal im Jahr und ist dabei leicht geneigt – so entstehen die Jahreszeiten."},
+  {text:"Warum schwitzen wir, wenn uns heiß ist?",
+   opts:["Der Schweiß kühlt unseren Körper ab","Der Körper will Wasser loswerden","Weil die Haut das mag"],correct:0,
+   why:"Wenn der Schweiß auf der Haut verdunstet, kühlt das den Körper ab."},
+  {text:"Warum sollten wir Müll trennen (Papier, Glas, Restmüll)?",
+   opts:["Damit man ihn besser recyceln kann","Damit der Müll bunter aussieht","Weil es sonst verboten ist"],correct:0,
+   why:"Getrennter Müll lässt sich leichter zu neuen Dingen recyceln, das spart Rohstoffe."},
+  {text:"Warum putzen wir uns die Zähne?",
+   opts:["Damit keine Löcher (Karies) entstehen","Damit die Zähne bunter werden","Damit wir größer werden"],correct:0,
+   why:"Zähneputzen entfernt Essensreste und Bakterien, die sonst Löcher verursachen."},
+  {text:"Warum brauchen Bienen Blumen?",
+   opts:["Sie sammeln Nektar und bestäuben dabei Pflanzen","Sie schlafen in den Blumen","Blumen sind ihre Feinde"],correct:0,
+   why:"Bienen holen sich Nektar und tragen dabei Blütenstaub von Blume zu Blume – das nennt man Bestäubung."},
+  {text:"Warum schwimmt Holz im Wasser, ein Stein aber nicht?",
+   opts:["Holz ist leichter als Wasser, der Stein schwerer","Holz mag Wasser lieber","Steine können nicht schwimmen lernen"],correct:0,
+   why:"Ob etwas schwimmt, hängt von der Dichte ab: Ist es leichter als die gleiche Menge Wasser, schwimmt es."},
+  {text:"Was macht ein Spiegel mit Licht?",
+   opts:["Er wirft es in eine andere Richtung zurück","Er lässt es verschwinden","Er wird davon warm"],correct:0,
+   why:"Licht wird von glatten Flächen wie Spiegeln reflektiert – dabei ändert es seine Richtung."},
+  {text:"Warum tragen Radfahrer einen Helm?",
+   opts:["Er schützt den Kopf bei einem Sturz","Er macht schneller","Er hält den Regen ab"],correct:0,
+   why:"Ein Helm dämpft den Aufprall und schützt so den Kopf bei einem Sturz."},
+  {text:"Woher kommt der Regen?",
+   opts:["Wasser verdunstet, wird Wolke und fällt als Regen herab","Der Himmel presst Wasser heraus","Regen kommt direkt vom Meer geflogen"],correct:0,
+   why:"Das ist der Wasserkreislauf: Wasser verdunstet, bildet Wolken und regnet wieder ab."},
+  {text:"Warum halten manche Tiere im Winter Winterschlaf?",
+   opts:["Um Energie zu sparen, wenn es kalt ist und Futter fehlt","Weil sie den Schnee nicht mögen","Weil sie sich verstecken wollen"],correct:0,
+   why:"Im Winterschlaf senken Tiere wie der Igel ihren Energieverbrauch, weil es kalt ist und kaum Nahrung da ist."},
+  {text:"Wofür brauchen wir die Feuerwehr?",
+   opts:["Um bei Bränden und Notfällen zu helfen","Um Häuser zu bauen","Um Blumen zu gießen"],correct:0,
+   why:"Die Feuerwehr löscht Brände und hilft bei Notfällen, damit Menschen in Sicherheit sind."},
+  {text:"Was zieht ein Magnet an?",
+   opts:["Dinge aus Eisen, wie Nägel oder Büroklammern","Alle Dinge, egal woraus","Nur Dinge aus Holz"],correct:0,
+   why:"Magnete ziehen vor allem Metalle wie Eisen an, aber kein Holz oder Plastik."},
+  {text:"Warum schaut man vor dem Überqueren der Straße nach links und rechts?",
+   opts:["Um sicherzugehen, dass kein Auto kommt","Um die Häuser anzuschauen","Weil es hübscher aussieht"],correct:0,
+   why:"So erkennt man rechtzeitig, ob ein Auto kommt, und kann sicher über die Straße gehen."},
+  {text:"Warum wachsen Pflanzen im Frühling besonders schnell?",
+   opts:["Es gibt mehr Licht und wärmere Temperaturen","Die Pflanzen haben Geburtstag","Der Boden wird bunter"],correct:0,
+   why:"Im Frühling scheint die Sonne länger und es wird wärmer – das lässt Pflanzen schneller wachsen."},
+  {text:"Was passiert mit Eis, wenn die Sonne darauf scheint?",
+   opts:["Es schmilzt und wird zu Wasser","Es wird noch härter","Es verschwindet einfach"],correct:0,
+   why:"Wärme durch Sonnenlicht lässt Eis schmelzen – aus fest wird flüssig."},
+  {text:"Warum atmen wir ständig?",
+   opts:["Um Sauerstoff aufzunehmen, den der Körper braucht","Um Geräusche zu machen","Damit die Nase beschäftigt ist"],correct:0,
+   why:"Unser Körper braucht Sauerstoff aus der Luft, um zu funktionieren – deshalb atmen wir ständig."}
 ];
 
 /* ---------------- Verlauf ---------------- */
@@ -362,14 +418,15 @@ const CHANGELOG=[
   {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."},
   {date:"27.07.2026", text:"Neue Rubrik Textaufgaben 📖 dazugekommen – mit den lustigen Geschichten von Piraten, Zauberern und frechen Hunden."},
   {date:"27.07.2026", text:"Große Geschichten 📜 dazugekommen: Apfelernte bei Oma, Der Piratenschatz und Die Geburtstagsparty – jede mit 3 Rechenschritten."},
-  {date:"27.07.2026", text:"Mathe-Aufgaben (Plus/Minus) auf den Zahlenraum bis 200 begrenzt."}
+  {date:"27.07.2026", text:"Mathe-Aufgaben (Plus/Minus) auf den Zahlenraum bis 200 begrenzt."},
+  {date:"27.07.2026", text:"Sachunterricht (8→24) und Deutsch (12→20) mit mehr Fragen bestückt – weniger Wiederholungen."}
 ];
 
 /* ---------------- Ablauf ---------------- */
 const SUBJECTS={
   mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 200 & Einmaleins",accent:"var(--mathe)",count:8},
   deutsch:{name:"Deutsch",emoji:"📖",tag:"Richtig schreiben",accent:"var(--deutsch)",count:8},
-  sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:6},
+  sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:8},
   text:{name:"Textaufgaben",emoji:"📖",tag:"Knifflige Sachaufgaben",accent:"var(--text)",count:8}
 };
 const STORY_META={name:"Geschichten",emoji:"📜",tag:"Große Rechen-Abenteuer in 3 Schritten",accent:"#D98C3D"};
