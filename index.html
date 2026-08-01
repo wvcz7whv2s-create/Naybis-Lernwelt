@@ -38,6 +38,15 @@
   .home-head h1{font-size:38px;margin:6px 0 0;font-weight:800;letter-spacing:-.5px;}
   .home-head .sub{font-size:15px;color:var(--ink-soft);margin-top:6px;}
 
+  .lang-toggle{display:flex;justify-content:center;gap:8px;margin-bottom:4px;}
+  .lang-btn{
+    border:none;cursor:pointer;background:var(--card);color:var(--ink-soft);
+    border-radius:14px;padding:8px 16px;font-size:14px;font-weight:800;box-shadow:var(--shadow-sm);
+    transition:background .15s,color .15s;
+  }
+  .lang-btn.active{background:var(--mathe);color:#fff;}
+  .lang-btn:active{transform:scale(.95);}
+
   .cards{display:flex;flex-direction:column;gap:16px;margin-top:6px;}
   .card{
     border:none;width:100%;text-align:left;cursor:pointer;
@@ -241,7 +250,7 @@ function makeMathQuestions(n){
 }
 
 // GESCHICHTEN: Mehrschritt-Sachaufgaben (aus "Matheaufgaben für Naybi")
-const STORIES=[
+const STORIES_DE=[
   {
     emoji:"🍎", title:"Apfelernte bei Oma",
     text:"Lena hilft Oma im Garten beim Apfelpflücken. Sie füllt <b>3</b> Körbe mit je <b>6</b> Äpfeln. Dann kommt Opa und bringt ihr noch <b>25</b> Äpfel aus dem Keller. Am Abend backen sie zusammen einen Apfelkuchen und brauchen dafür <b>16</b> Äpfel. Wie viele Äpfel hat Lena am Ende noch übrig? 🥧",
@@ -271,8 +280,39 @@ const STORIES=[
   }
 ];
 
+// HISTORIAS: versión en español (mismos números, texto traducido)
+const STORIES_ES=[
+  {
+    emoji:"🍎", title:"La cosecha de manzanas",
+    text:"Lena ayuda a la abuela en el jardín a recoger manzanas. Llena <b>3</b> cestas con <b>6</b> manzanas cada una. Luego llega el abuelo y le trae <b>25</b> manzanas más del sótano. Por la noche hornean juntos un pastel de manzana y necesitan <b>16</b> manzanas para eso. ¿Cuántas manzanas le quedan a Lena al final? 🥧",
+    steps:[
+      {label:"Paso 1 · Multiplicación",q:"¿Cuántas manzanas hay en las 3 cestas (3 × 6)?",a:18},
+      {label:"Paso 2 · Suma",q:"Ahora suma las 25 manzanas del abuelo:",a:43},
+      {label:"Paso 3 · Resta",q:"Por último, resta las 16 manzanas del pastel:",a:27}
+    ]
+  },
+  {
+    emoji:"🏴‍☠️", title:"El tesoro pirata",
+    text:"El capitán Piernatorcida abre <b>4</b> cofres del tesoro. En cada cofre brillan <b>20</b> monedas de oro. Cavando en la playa encuentra <b>38</b> monedas más. Pero luego se compra un loro travieso por <b>49</b> monedas. ¿Cuántas monedas de oro le quedan ahora al capitán? 🦜",
+    steps:[
+      {label:"Paso 1 · Multiplicación",q:"¿Cuánto oro hay en los 4 cofres (4 × 20)?",a:80},
+      {label:"Paso 2 · Suma",q:"Ahora suma las 38 monedas de la playa:",a:118},
+      {label:"Paso 3 · Resta",q:"Por último, resta las 49 monedas del loro:",a:69}
+    ]
+  },
+  {
+    emoji:"🎈", title:"La fiesta de cumpleaños",
+    text:"Mía decora <b>5</b> mesas para su cumpleaños con <b>5</b> globos cada una. El servicio de fiestas trae <b>60</b> globos de colores más. Durante el juego, lamentablemente <b>28</b> globos explotan con un gran ¡pum! ¿Cuántos globos flotan todavía por la sala al final? 🎉",
+    steps:[
+      {label:"Paso 1 · Multiplicación",q:"¿Cuántos globos hay en las 5 mesas (5 × 5)?",a:25},
+      {label:"Paso 2 · Suma",q:"Ahora suma los 60 globos entregados:",a:85},
+      {label:"Paso 3 · Resta",q:"Por último, resta los 28 globos que explotaron:",a:57}
+    ]
+  }
+];
+
 // TEXTAUFGABEN: Original-Sachaufgaben (aus "Matheaufgaben für Naybi")
-const TEXTAUFGABEN=[
+const TEXTAUFGABEN_DE=[
   {text:"Emma hat 34 Gummibärchen. Ihre beste Freundin schenkt ihr 47 weitere. Wie viele Gummibärchen hat Emma jetzt?",answer:81},
   {text:"Ein Clown hat 58 bunte Luftballons. Der Wind bläst ihm 29 neue zu. Wie viele Luftballons hat der Clown insgesamt?",answer:87},
   {text:"Tim sammelt Dinosaurierkarten. Er hat 63 Karten zu Hause und kauft im Laden 38 neue. Wie viele Karten hat er jetzt?",answer:101},
@@ -311,6 +351,46 @@ const TEXTAUFGABEN=[
   {text:"28 Socken liegen auf einem Haufen. Wie viele Paare ergibt das?",answer:14}
 ];
 
+// PROBLEMAS: versión en español (mismos números)
+const TEXTAUFGABEN_ES=[
+  {text:"Emma tiene 34 ositos de goma. Su mejor amiga le regala 47 más. ¿Cuántos ositos de goma tiene Emma ahora?",answer:81},
+  {text:"Un payaso tiene 58 globos de colores. El viento le trae 29 más. ¿Cuántos globos tiene el payaso en total?",answer:87},
+  {text:"Tim colecciona cartas de dinosaurios. Tiene 63 en casa y compra 38 nuevas en la tienda. ¿Cuántas cartas tiene ahora?",answer:101},
+  {text:"En el comedor escolar hay papas fritas hoy. 45 niños las quieren, y luego se suman 37 niños más. ¿Cuántos niños quieren papas fritas?",answer:82},
+  {text:"Un perro ya ha robado 76 calcetines en su vida. Hoy roba 18 más. ¿Cuántos calcetines ha robado el pícaro perro en total?",answer:94},
+  {text:"En el parque hay 52 palomas. De repente llegan volando 41 palomas más porque alguien tira pan. ¿Cuántas palomas hay ahora?",answer:93},
+  {text:"El mago Zippel ha aprendido 49 trucos de magia. Su maestro le enseña 44 trucos nuevos. ¿Cuántos trucos sabe Zippel ahora?",answer:93},
+  {text:"En una panadería se hornean 85 panecillos por la mañana. Al mediodía se hornean 47 más recién hechos. ¿Cuántos panecillos se hornearon en total?",answer:132},
+  {text:"Lena está leyendo un libro. Ya leyó 37 páginas y luego lee 56 páginas más. ¿Cuántas páginas ha leído en total?",answer:93},
+  {text:"Un caballero ha pulido 67 piezas de su armadura. Todavía tiene que pulir 48 más. ¿Cuántas piezas ha pulido en total?",answer:115},
+  {text:"En una granja hay 74 gallinas. El granjero compra 39 gallinas nuevas. ¿Cuántas gallinas cacarean ahora en total en la granja?",answer:113},
+  {text:"Noah tomó 88 fotos en las vacaciones. Su hermano tomó 55 fotos. ¿Cuántas fotos tomaron los dos juntos?",answer:143},
+  {text:"Un pirata tiene 143 monedas de oro en su tesoro. Gasta 58 monedas en un loro nuevo. ¿Cuántas monedas le quedan al pirata?",answer:85},
+  {text:"En una bolsa hay 120 caramelos. Jonás se come 47. ¿Cuántos caramelos quedan en la bolsa?",answer:73},
+  {text:"Un tren lleva 135 pasajeros. En la primera parada bajan 68 personas. ¿Cuántos pasajeros quedan en el tren?",answer:67},
+  {text:"Sophie tiene 98 pegatinas en su colección. Regala 35 pegatinas a su amiga. ¿Cuántas pegatinas le quedan a Sophie?",answer:63},
+  {text:"En un libro de buscar y encontrar hay 150 objetos escondidos. Luca ya encontró 87. ¿Cuántos objetos le faltan por buscar?",answer:63},
+  {text:"Un refrigerador tenía 112 yogures. La familia se come 49. ¿Cuántos yogures quedan en el refrigerador?",answer:63},
+  {text:"Una piscina tiene 140 bañistas. Cuando empieza a llover, 93 se van a casa. ¿Cuántos bañistas quedan en la piscina?",answer:47},
+  {text:"En el zoológico viven 127 animales. 54 de ellos están profundamente dormidos. ¿Cuántos animales están despiertos?",answer:73},
+  {text:"Un panadero horneó 108 galletas. Vende 79 galletas antes del mediodía. ¿Cuántas galletas quedan?",answer:29},
+  {text:"En una larga caminata, Mía debe subir 136 escalones. Ya ha subido 65. ¿Cuántos escalones le faltan?",answer:71},
+  {text:"Un payaso tiene 115 chistes en su libro de chistes. Hoy ya contó 48. ¿Cuántos chistes no ha contado todavía?",answer:67},
+  {text:"En el circo se vendieron 130 entradas. Luego se devuelven 57 porque el león está resfriado. ¿Cuántas entradas siguen siendo válidas?",answer:73},
+  {text:"Un pulpo tiene 8 brazos. ¿Cuántos brazos tienen 7 pulpos en total?",answer:56},
+  {text:"Una araña tiene 8 patas. ¿Cuántas patas tienen 6 arañas juntas?",answer:48},
+  {text:"Un paquete de chicles tiene 5 tiras. ¿Cuántas tiras hay en 9 paquetes?",answer:45},
+  {text:"Una clase hornea muffins. Cada uno de los 8 niños hornea 7 muffins. ¿Cuántos muffins hay en total?",answer:56},
+  {text:"Un perro entierra 4 huesos cada día. ¿Cuántos huesos entierra en una semana (7 días)?",answer:28},
+  {text:"Un mago hace magia 6 veces y cada vez aparecen 9 conejos del sombrero. ¿Cuántos conejos son en total?",answer:54},
+  {text:"Hay que repartir 36 galletas por igual en 4 platos. ¿Cuántas galletas hay en cada plato?",answer:9},
+  {text:"45 alumnos van de excursión en coches con 5 plazas cada uno. ¿Cuántos coches se necesitan?",answer:9},
+  {text:"Un payaso tiene 24 narices de colores y las reparte por igual entre sus 3 compañeros. ¿Cuántas narices recibe cada uno?",answer:8},
+  {text:"30 caramelos se reparten en partes iguales entre 6 amigos. ¿Cuántos caramelos recibe cada niño?",answer:5},
+  {text:"Un pirata encuentra 48 monedas de oro y las reparte en partes iguales en 4 cofres del tesoro. ¿Cuántas monedas hay en cada cofre?",answer:12},
+  {text:"Hay 28 calcetines en un montón. ¿Cuántos pares forman?",answer:14}
+];
+
 // DEUTSCH: Rechtschreibung – welche Schreibweise ist richtig?
 const DEUTSCH=[
   {text:"Welches Wort ist richtig geschrieben?",opts:["Fahrrad","Farrad","Fahrad"],correct:0},
@@ -336,7 +416,7 @@ const DEUTSCH=[
 ];
 
 // SACHUNTERRICHT: Zusammenhänge verstehen – mit Erklärung
-const SACH=[
+const SACH_DE=[
   {text:"Was passiert mit Wasser, wenn es sehr kalt wird (unter 0°C)?",
    opts:["Es wird zu Eis","Es verschwindet","Es wird wärmer"],correct:0,
    why:"Bei großer Kälte gefriert Wasser und wird fest – das nennt man Eis."},
@@ -411,25 +491,160 @@ const SACH=[
    why:"Unser Körper braucht Sauerstoff aus der Luft, um zu funktionieren – deshalb atmen wir ständig."}
 ];
 
+// CIENCIAS: versión en español, entender relaciones causales
+const SACH_ES=[
+  {text:"¿Qué le pasa al agua cuando hace mucho frío (menos de 0°C)?",
+   opts:["Se convierte en hielo","Desaparece","Se vuelve más caliente"],correct:0,
+   why:"Con mucho frío el agua se congela y se vuelve sólida – eso se llama hielo."},
+  {text:"¿Por qué usamos chaquetas gruesas en invierno?",
+   opts:["Porque mantienen el calor del cuerpo","Porque se ven bonitas","Porque son ligeras"],correct:0,
+   why:"La chaqueta gruesa retiene el calor del cuerpo, así no sentimos tanto frío."},
+  {text:"¿Por qué las plantas necesitan luz?",
+   opts:["Para poder crecer","Para poder dormir","Para mantenerse frías"],correct:0,
+   why:"Las plantas usan la luz para fabricar su propio alimento – sin luz no crecen."},
+  {text:"¿Por qué oscurece por la noche?",
+   opts:["La Tierra gira alejándose del Sol","El Sol se rompe","La Luna apaga la luz"],correct:0,
+   why:"La Tierra gira sobre sí misma. Cuando nuestro lado deja de mirar al Sol, se hace de noche."},
+  {text:"¿Por qué una manzana cae del árbol hacia abajo?",
+   opts:["La gravedad la atrae hacia la Tierra","El viento la empuja","Es demasiado pesada para el aire"],correct:0,
+   why:"La Tierra atrae todas las cosas hacia sí – esa fuerza se llama gravedad."},
+  {text:"¿Por qué algunas aves viajan al sur en invierno?",
+   opts:["Allí hace más calor y hay comida","Allí está más oscuro","Allí viven sus amigos"],correct:0,
+   why:"En el sur las aves encuentran más comida en invierno y no hace tanto frío."},
+  {text:"¿Qué necesitan casi todos los animales para vivir?",
+   opts:["Aire, agua y alimento","Solo luz solar","Solo un nombre"],correct:0,
+   why:"Sin aire, agua y comida, ningún animal puede vivir mucho tiempo."},
+  {text:"¿Por qué podemos ver la Luna en el cielo?",
+   opts:["El Sol la ilumina","Tiene su propia lámpara","Está en llamas"],correct:0,
+   why:"La Luna no brilla por sí sola – el Sol la ilumina y por eso vemos su luz."},
+  {text:"¿Por qué cambian las estaciones del año?",
+   opts:["La Tierra gira inclinada alrededor del Sol","La Luna lo controla","Las personas lo deciden"],correct:0,
+   why:"La Tierra da una vuelta al Sol cada año y está un poco inclinada – así se forman las estaciones."},
+  {text:"¿Por qué sudamos cuando tenemos calor?",
+   opts:["El sudor enfría nuestro cuerpo","El cuerpo quiere deshacerse de agua","Porque a la piel le gusta"],correct:0,
+   why:"Cuando el sudor se evapora en la piel, eso enfría el cuerpo."},
+  {text:"¿Por qué debemos separar la basura (papel, vidrio, resto)?",
+   opts:["Para poder reciclarla mejor","Para que la basura se vea más colorida","Porque si no está prohibido"],correct:0,
+   why:"La basura separada se puede reciclar más fácilmente y así se ahorran materiales."},
+  {text:"¿Por qué nos cepillamos los dientes?",
+   opts:["Para que no salgan caries","Para que los dientes se vean más coloridos","Para crecer más"],correct:0,
+   why:"Cepillarse elimina restos de comida y bacterias que si no causan caries."},
+  {text:"¿Por qué las abejas necesitan flores?",
+   opts:["Recogen néctar y así polinizan las plantas","Duermen dentro de las flores","Las flores son sus enemigas"],correct:0,
+   why:"Las abejas recogen néctar y llevan polen de una flor a otra – eso se llama polinización."},
+  {text:"¿Por qué la madera flota en el agua pero una piedra no?",
+   opts:["La madera es más ligera que el agua, la piedra más pesada","A la madera le gusta más el agua","Las piedras no pueden aprender a nadar"],correct:0,
+   why:"Si algo flota depende de su densidad: si pesa menos que la misma cantidad de agua, flota."},
+  {text:"¿Qué hace un espejo con la luz?",
+   opts:["La refleja hacia otra dirección","La hace desaparecer","Se calienta con ella"],correct:0,
+   why:"La luz se refleja en superficies lisas como los espejos y así cambia de dirección."},
+  {text:"¿Por qué los ciclistas usan casco?",
+   opts:["Protege la cabeza si hay una caída","Hace ir más rápido","Detiene la lluvia"],correct:0,
+   why:"El casco amortigua el golpe y así protege la cabeza en una caída."},
+  {text:"¿De dónde viene la lluvia?",
+   opts:["El agua se evapora, forma nubes y cae como lluvia","El cielo exprime el agua","La lluvia vuela directamente desde el mar"],correct:0,
+   why:"Eso es el ciclo del agua: el agua se evapora, forma nubes y vuelve a caer como lluvia."},
+  {text:"¿Por qué algunos animales hibernan en invierno?",
+   opts:["Para ahorrar energía cuando hace frío y falta comida","Porque no les gusta la nieve","Porque quieren esconderse"],correct:0,
+   why:"Al hibernar, animales como el erizo bajan su gasto de energía porque hace frío y hay poca comida."},
+  {text:"¿Para qué necesitamos a los bomberos?",
+   opts:["Para ayudar en incendios y emergencias","Para construir casas","Para regar las flores"],correct:0,
+   why:"Los bomberos apagan incendios y ayudan en emergencias para mantener a las personas a salvo."},
+  {text:"¿Qué atrae un imán?",
+   opts:["Cosas de hierro, como clavos o clips","Todas las cosas, sin importar el material","Solo cosas de madera"],correct:0,
+   why:"Los imanes atraen sobre todo metales como el hierro, pero no la madera ni el plástico."},
+  {text:"¿Por qué miramos a la izquierda y a la derecha antes de cruzar la calle?",
+   opts:["Para asegurarnos de que no viene ningún coche","Para mirar las casas","Porque se ve más bonito"],correct:0,
+   why:"Así nos damos cuenta a tiempo si viene un coche y podemos cruzar con seguridad."},
+  {text:"¿Por qué las plantas crecen más rápido en primavera?",
+   opts:["Hay más luz y temperaturas más cálidas","Las plantas cumplen años","El suelo se vuelve más colorido"],correct:0,
+   why:"En primavera el sol brilla más tiempo y hace más calor – eso hace crecer a las plantas más rápido."},
+  {text:"¿Qué le pasa al hielo cuando le da el sol?",
+   opts:["Se derrite y se convierte en agua","Se vuelve más duro","Simplemente desaparece"],correct:0,
+   why:"El calor del sol derrite el hielo – de sólido pasa a líquido."},
+  {text:"¿Por qué respiramos todo el tiempo?",
+   opts:["Para tomar el oxígeno que el cuerpo necesita","Para hacer ruidos","Para mantener ocupada la nariz"],correct:0,
+   why:"Nuestro cuerpo necesita el oxígeno del aire para funcionar – por eso respiramos sin parar."}
+];
+
 /* ---------------- Verlauf ---------------- */
 // Hier trägt Papa (bzw. Claude) jede Änderung mit Datum ein.
-const CHANGELOG=[
+const CHANGELOG_DE=[
   {date:"26.07.2026", text:"Lernwelt ist online gegangen! 🎉 Erste Aufgaben zu Mathe, Deutsch und Sachunterricht."},
   {date:"26.07.2026", text:"Verlauf eingebaut – hier siehst du jetzt, was sich alles getan hat."},
   {date:"27.07.2026", text:"Neue Rubrik Textaufgaben 📖 dazugekommen – mit den lustigen Geschichten von Piraten, Zauberern und frechen Hunden."},
   {date:"27.07.2026", text:"Große Geschichten 📜 dazugekommen: Apfelernte bei Oma, Der Piratenschatz und Die Geburtstagsparty – jede mit 3 Rechenschritten."},
   {date:"27.07.2026", text:"Mathe-Aufgaben (Plus/Minus) auf den Zahlenraum bis 200 begrenzt."},
-  {date:"27.07.2026", text:"Sachunterricht (8→24) und Deutsch (12→20) mit mehr Fragen bestückt – weniger Wiederholungen."}
+  {date:"27.07.2026", text:"Sachunterricht (8→24) und Deutsch (12→20) mit mehr Fragen bestückt – weniger Wiederholungen."},
+  {date:"01.08.2026", text:"Spanische Sprachversion 🇪🇸 hinzugefügt – mit Umschalter auf der Startseite."}
 ];
 
-/* ---------------- Ablauf ---------------- */
-const SUBJECTS={
-  mathe:{name:"Mathe",emoji:"➕",tag:"Rechnen bis 200 & Einmaleins",accent:"var(--mathe)",count:8},
-  deutsch:{name:"Deutsch",emoji:"📖",tag:"Richtig schreiben",accent:"var(--deutsch)",count:8},
-  sach:{name:"Sachunterricht",emoji:"🌍",tag:"Warum ist das so?",accent:"var(--sach)",count:8},
-  text:{name:"Textaufgaben",emoji:"📖",tag:"Knifflige Sachaufgaben",accent:"var(--text)",count:8}
+const CHANGELOG_ES=[
+  {date:"26.07.2026", text:"¡Lernwelt ya está en línea! 🎉 Primeras actividades de Matemáticas, Alemán y Ciencias."},
+  {date:"26.07.2026", text:"Se agregó el historial – aquí puedes ver todo lo que ha cambiado."},
+  {date:"27.07.2026", text:"Nueva sección Problemas 📖 – con las divertidas historias de piratas, magos y perros traviesos."},
+  {date:"27.07.2026", text:"Se agregaron grandes Historias 📜: La cosecha de manzanas, El tesoro pirata y La fiesta de cumpleaños – cada una con 3 pasos."},
+  {date:"27.07.2026", text:"Los ejercicios de Matemáticas (suma/resta) se limitaron al rango hasta 200."},
+  {date:"27.07.2026", text:"Ciencias (8→24) y Alemán (12→20) ahora tienen más preguntas – menos repeticiones."},
+  {date:"01.08.2026", text:"Se agregó la versión en español 🇪🇸 – con un botón para cambiar de idioma en la pantalla de inicio."}
+];
+
+/* ---------------- Idioma / UI-Texte ---------------- */
+let LANG="de";
+const UI={
+  de:{
+    welcome:"Willkommen zurück", subtitle:"Such dir ein Fach aus und leg los ✨",
+    historyBtn:"🕘 Verlauf ansehen", footerHome:"Prototyp · Übungen für die 3. Klasse",
+    historyTitle:"🕘 Verlauf", historyFooter:"Das war's bisher – es geht weiter! 🌱",
+    storiesTitle:"Geschichten", storiesSub:"3 Rechenschritte zum Knobeln",
+    storiesFooter:"Wähl ein Abenteuer aus 📜",
+    calcLabel:"Rechne aus", taskLabel:"Aufgabe", nextBtn:"Weiter ›",
+    cheers:["Super!","Klasse!","Genau richtig!","Toll gemacht!","Stark!"],
+    wrongNum:"Fast! Schau nochmal genau hin.", wrongChoice:"Nicht ganz – probier eine andere.",
+    donePerfect:"Perfekt!", doneGood:"Gut gemacht!", doneSub:"Du hast diese Runde geschafft.",
+    starsOf:(a,b)=>`⭐ ${a} von ${b} Sternen`, again:"Nochmal", subjectsBtn:"Fächer",
+    stepCorrect:"Richtig! ✓", stepWrong:"Nicht ganz – versuch's nochmal.",
+    storyDoneTitle:"Geschafft!", storyDoneSub:"Du hast das ganze Abenteuer gelöst.", otherStory:"Andere Geschichte",
+    deutschPrompt:"Welches Wort ist richtig geschrieben?"
+  },
+  es:{
+    welcome:"¡Bienvenida de nuevo!", subtitle:"Elige una materia y ¡empieza! ✨",
+    historyBtn:"🕘 Ver historial", footerHome:"Aplicación · Ejercicios de 3er grado",
+    historyTitle:"🕘 Historial", historyFooter:"Esto es todo por ahora – ¡sigue creciendo! 🌱",
+    storiesTitle:"Historias", storiesSub:"3 pasos para resolver",
+    storiesFooter:"Elige una aventura 📜",
+    calcLabel:"Calcula", taskLabel:"Actividad", nextBtn:"Seguir ›",
+    cheers:["¡Genial!","¡Súper!","¡Exacto!","¡Bien hecho!","¡Fuerte!"],
+    wrongNum:"¡Casi! Mira otra vez con calma.", wrongChoice:"No del todo – prueba otra.",
+    donePerfect:"¡Perfecto!", doneGood:"¡Bien hecho!", doneSub:"Terminaste esta ronda.",
+    starsOf:(a,b)=>`⭐ ${a} de ${b} estrellas`, again:"Otra vez", subjectsBtn:"Materias",
+    stepCorrect:"¡Correcto! ✓", stepWrong:"No del todo – inténtalo de nuevo.",
+    storyDoneTitle:"¡Lo lograste!", storyDoneSub:"Resolviste toda la aventura.", otherStory:"Otra historia",
+    deutschPrompt:"¿Cuál palabra en alemán está bien escrita?"
+  }
 };
-const STORY_META={name:"Geschichten",emoji:"📜",tag:"Große Rechen-Abenteuer in 3 Schritten",accent:"#D98C3D"};
+function t(key){ return UI[LANG][key]; }
+function langToggleHTML(){
+  return `<div class="lang-toggle">
+    <button class="lang-btn ${LANG==='de'?'active':''}" onclick="setLang('de')">🇩🇪 DE</button>
+    <button class="lang-btn ${LANG==='es'?'active':''}" onclick="setLang('es')">🇪🇸 ES</button>
+  </div>`;
+}
+function setLang(l){ LANG=l; renderHome(); }
+
+/* ---------------- Ablauf ---------------- */
+const SUBJECT_META={
+  mathe:{emoji:"➕",accent:"var(--mathe)",count:8,
+    name:{de:"Mathe",es:"Matemáticas"}, tag:{de:"Rechnen bis 200 & Einmaleins",es:"Cálculo hasta 200 y tablas"}},
+  deutsch:{emoji:"📖",accent:"var(--deutsch)",count:8,
+    name:{de:"Deutsch",es:"Alemán"}, tag:{de:"Richtig schreiben",es:"Ortografía alemana"}},
+  sach:{emoji:"🌍",accent:"var(--sach)",count:8,
+    name:{de:"Sachunterricht",es:"Ciencias"}, tag:{de:"Warum ist das so?",es:"¿Por qué es así?"}},
+  text:{emoji:"📖",accent:"var(--text)",count:8,
+    name:{de:"Textaufgaben",es:"Problemas"}, tag:{de:"Knifflige Sachaufgaben",es:"Problemas para pensar"}}
+};
+const STORY_META={emoji:"📜",accent:"#D98C3D",
+  name:{de:"Geschichten",es:"Historias"}, tag:{de:"Große Rechen-Abenteuer in 3 Schritten",es:"Grandes aventuras matemáticas en 3 pasos"}};
 
 const app=document.getElementById("app");
 let state=null;
@@ -437,12 +652,20 @@ let state=null;
 function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function buildQuestions(sub){
-  if(sub==="mathe") return makeMathQuestions(SUBJECTS.mathe.count);
+  if(sub==="mathe") return makeMathQuestions(SUBJECT_META.mathe.count);
   if(sub==="text"){
-    return shuffle(TEXTAUFGABEN).slice(0,SUBJECTS.text.count).map(q=>({kind:"num",text:q.text,answer:String(q.answer)}));
+    const pool = LANG==='es'?TEXTAUFGABEN_ES:TEXTAUFGABEN_DE;
+    return shuffle(pool).slice(0,SUBJECT_META.text.count).map(q=>({kind:"num",text:q.text,answer:String(q.answer)}));
   }
-  const pool = sub==="deutsch"?DEUTSCH:SACH;
-  return shuffle(pool).slice(0,SUBJECTS[sub].count).map(q=>{
+  if(sub==="deutsch"){
+    return shuffle(DEUTSCH).slice(0,SUBJECT_META.deutsch.count).map(q=>{
+      const correctText=q.opts[q.correct];
+      const opts=shuffle(q.opts);
+      return {kind:"choice",text:t("deutschPrompt"),opts:opts,answer:correctText,why:null};
+    });
+  }
+  const pool = LANG==='es'?SACH_ES:SACH_DE;
+  return shuffle(pool).slice(0,SUBJECT_META.sach.count).map(q=>{
     // Antwortoptionen mischen, richtige Antwort mitverfolgen
     const correctText=q.opts[q.correct];
     const opts=shuffle(q.opts);
@@ -455,36 +678,38 @@ function renderHome(){
   state=null;
   document.documentElement.style.setProperty('--accent','var(--mathe)');
   app.innerHTML=`
+    ${langToggleHTML()}
     <div class="home-head">
-      <div class="hi">Willkommen zurück</div>
+      <div class="hi">${t("welcome")}</div>
       <h1>Lernwelt</h1>
-      <div class="sub">Such dir ein Fach aus und leg los ✨</div>
+      <div class="sub">${t("subtitle")}</div>
     </div>
     <div class="cards">
-      ${Object.entries(SUBJECTS).map(([k,s])=>`
+      ${Object.entries(SUBJECT_META).map(([k,s])=>`
         <button class="card" style="--c:${s.accent}" onclick="startSubject('${k}')">
           <span class="emoji">${s.emoji}</span>
-          <span class="txt"><h2>${s.name}</h2><p>${s.tag}</p></span>
+          <span class="txt"><h2>${s.name[LANG]}</h2><p>${s.tag[LANG]}</p></span>
           <span class="go">›</span>
         </button>`).join("")}
       <button class="card" style="--c:${STORY_META.accent}" onclick="startStories()">
         <span class="emoji">${STORY_META.emoji}</span>
-        <span class="txt"><h2>${STORY_META.name}</h2><p>${STORY_META.tag}</p></span>
+        <span class="txt"><h2>${STORY_META.name[LANG]}</h2><p>${STORY_META.tag[LANG]}</p></span>
         <span class="go">›</span>
       </button>
     </div>
-    <button class="hist-btn" onclick="renderHistory()">🕘 Verlauf ansehen</button>
-    <div class="foot">Prototyp · Übungen für die 3. Klasse</div>`;
+    <button class="hist-btn" onclick="renderHistory()">${t("historyBtn")}</button>
+    <div class="foot">${t("footerHome")}</div>`;
 }
 
 /* ---- Verlaufs-Seite ---- */
 function renderHistory(){
   document.documentElement.style.setProperty('--accent','var(--mathe)');
-  const items=CHANGELOG.slice().reverse(); // neueste zuerst
+  const list = LANG==='es'?CHANGELOG_ES:CHANGELOG_DE;
+  const items=list.slice().reverse(); // neueste zuerst
   app.innerHTML=`
     <div class="top">
       <button class="back" onclick="renderHome()">‹</button>
-      <span class="name">🕘 Verlauf</span>
+      <span class="name">${t("historyTitle")}</span>
     </div>
     <div class="hist-list">
       ${items.map(it=>`
@@ -493,37 +718,38 @@ function renderHistory(){
           <div class="t">${it.text}</div>
         </div>`).join("")}
     </div>
-    <div class="foot">Das war's bisher – es geht weiter! 🌱</div>`;
+    <div class="foot">${t("historyFooter")}</div>`;
 }
 
 /* ---- Geschichten: Auswahl ---- */
 function startStories(){
   document.documentElement.style.setProperty('--accent',STORY_META.accent);
+  const list = LANG==='es'?STORIES_ES:STORIES_DE;
   app.innerHTML=`
     <div class="top">
       <button class="back" onclick="renderHome()">‹</button>
-      <span class="name">${STORY_META.emoji} Geschichten</span>
+      <span class="name">${STORY_META.emoji} ${t("storiesTitle")}</span>
     </div>
     <div class="cards">
-      ${STORIES.map((s,i)=>`
+      ${list.map((s,i)=>`
         <button class="card" style="--c:${STORY_META.accent}" onclick="openStory(${i})">
           <span class="emoji">${s.emoji}</span>
-          <span class="txt"><h2>${s.title}</h2><p>3 Rechenschritte zum Knobeln</p></span>
+          <span class="txt"><h2>${s.title}</h2><p>${t("storiesSub")}</p></span>
           <span class="go">›</span>
         </button>`).join("")}
     </div>
-    <div class="foot">Wähl ein Abenteuer aus 📜</div>`;
+    <div class="foot">${t("storiesFooter")}</div>`;
 }
 
 /* ---- Geschichte spielen ---- */
 let storyState=null;
 function openStory(i){
-  const s=STORIES[i];
   storyState={idx:i,step:0,done:[false,false,false]};
   renderStory();
 }
 function renderStory(){
-  const s=STORIES[storyState.idx];
+  const list = LANG==='es'?STORIES_ES:STORIES_DE;
+  const s=list[storyState.idx];
   app.innerHTML=`
     <div class="top">
       <button class="back" onclick="startStories()">‹</button>
@@ -547,7 +773,8 @@ function renderStory(){
     </div>`;
 }
 function checkStep(i){
-  const s=STORIES[storyState.idx], st=s.steps[i];
+  const list = LANG==='es'?STORIES_ES:STORIES_DE;
+  const s=list[storyState.idx], st=s.steps[i];
   const inp=document.getElementById("inp"+i);
   const val=inp.value.trim();
   const stepEl=document.getElementById("step"+i);
@@ -556,7 +783,7 @@ function checkStep(i){
   if(parseInt(val,10)===st.a){
     stepEl.classList.add("correct");
     inp.disabled=true;
-    fb.className="stepfb show ok"; fb.textContent="Richtig! ✓";
+    fb.className="stepfb show ok"; fb.textContent=t("stepCorrect");
     if(i===s.steps.length-1){
       setTimeout(()=>storyDone(),700);
     }else{
@@ -565,12 +792,13 @@ function checkStep(i){
     }
   }else{
     stepEl.classList.add("wrong");
-    fb.className="stepfb show no"; fb.textContent="Nicht ganz – versuch's nochmal.";
+    fb.className="stepfb show no"; fb.textContent=t("stepWrong");
     setTimeout(()=>stepEl.classList.remove("wrong"),600);
   }
 }
 function storyDone(){
-  const s=STORIES[storyState.idx];
+  const list = LANG==='es'?STORIES_ES:STORIES_DE;
+  const s=list[storyState.idx];
   app.innerHTML=`
     <div class="top">
       <button class="back" onclick="startStories()">‹</button>
@@ -578,18 +806,18 @@ function storyDone(){
     </div>
     <div class="done">
       <div class="burst">🏆</div>
-      <h2>Geschafft!</h2>
-      <p>Du hast das ganze Abenteuer gelöst.</p>
+      <h2>${t("storyDoneTitle")}</h2>
+      <p>${t("storyDoneSub")}</p>
       <div class="row">
-        <button class="again" onclick="openStory(${storyState.idx})">Nochmal</button>
-        <button class="home-btn" onclick="startStories()">Andere Geschichte</button>
+        <button class="again" onclick="openStory(${storyState.idx})">${t("again")}</button>
+        <button class="home-btn" onclick="startStories()">${t("otherStory")}</button>
       </div>
     </div>`;
 }
 
 /* ---- QUIZ starten ---- */
 function startSubject(sub){
-  const meta=SUBJECTS[sub];
+  const meta={emoji:SUBJECT_META[sub].emoji, name:SUBJECT_META[sub].name[LANG], accent:SUBJECT_META[sub].accent};
   document.documentElement.style.setProperty('--accent',meta.accent);
   state={sub:sub,meta:meta,questions:buildQuestions(sub),idx:0,stars:0,input:"",answered:false};
   renderQuestion();
@@ -621,12 +849,12 @@ function renderQuestion(){
     </div>
     <div class="dots">${dots}</div>
     <div class="q-card">
-      <div class="q-label">${q.kind==='num'?'Rechne aus':'Aufgabe '+(s.idx+1)}</div>
+      <div class="q-label">${q.kind==='num'?t("calcLabel"):t("taskLabel")+' '+(s.idx+1)}</div>
       <div class="q-text ${q.text.length>34?'small':''}">${q.text}</div>
     </div>
     ${body}
     <div class="fb" id="fb"></div>
-    <button class="next" id="next" onclick="nextQ()">Weiter ›</button>`;
+    <button class="next" id="next" onclick="nextQ()">${t("nextBtn")}</button>`;
   s.input=""; s.answered=false;
 }
 
@@ -653,7 +881,7 @@ function checkNum(){
   }else{
     d.classList.add("wrong"); d.classList.add("shake");
     setTimeout(()=>{d.classList.remove("wrong","shake"); s.input=""; updateDisp();},650);
-    flash("Fast! Schau nochmal genau hin.");
+    flash(t("wrongNum"));
   }
 }
 
@@ -671,7 +899,7 @@ function pick(i){
   }else{
     btns[i].classList.add("wrong"); btns[i].classList.add("shake");
     setTimeout(()=>btns[i].classList.remove("shake"),450);
-    flash("Nicht ganz – probier eine andere.");
+    flash(t("wrongChoice"));
   }
 }
 
@@ -698,7 +926,7 @@ function flyStar(){
 function showFB(ok,why){
   const fb=document.getElementById("fb");
   fb.className="fb show "+(ok?"ok":"no");
-  const cheers=["Super!","Klasse!","Genau richtig!","Toll gemacht!","Stark!"];
+  const cheers=t("cheers");
   const msg=ok?cheers[Math.floor(Math.random()*cheers.length)]:"";
   fb.innerHTML=`<span class="big">${ok?'🎉':'🤔'}</span><span>${msg}${why?`<span class="why">${why}</span>`:""}</span>`;
 }
@@ -728,12 +956,12 @@ function renderDone(){
     </div>
     <div class="done">
       <div class="burst">${perfect?'🏆':'🌟'}</div>
-      <h2>${perfect?'Perfekt!':'Gut gemacht!'}</h2>
-      <p>Du hast diese Runde geschafft.</p>
-      <div class="tally">⭐ ${s.stars} von ${total} Sternen</div>
+      <h2>${perfect?t("donePerfect"):t("doneGood")}</h2>
+      <p>${t("doneSub")}</p>
+      <div class="tally">${t("starsOf")(s.stars,total)}</div>
       <div class="row">
-        <button class="again" onclick="startSubject('${s.sub}')">Nochmal</button>
-        <button class="home-btn" onclick="renderHome()">Fächer</button>
+        <button class="again" onclick="startSubject('${s.sub}')">${t("again")}</button>
+        <button class="home-btn" onclick="renderHome()">${t("subjectsBtn")}</button>
       </div>
     </div>`;
 }
